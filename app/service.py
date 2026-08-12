@@ -33,6 +33,8 @@ class TramService:
             raise ValueError("El correo electronico proporcionado no tiene un formato valido.")
         if not isinstance(documents, list) or any(not isinstance(item, dict) or not item.get("name") for item in documents):
             raise ValueError("documents debe ser una lista de objetos con el campo name.")
+        if not documents:
+            raise ValueError("Debe declarar al menos un documento para iniciar el tramite. Si no tiene ninguno, indique 'Ninguno' u otro documento que posea.")
 
         procedure_type, confidence = self.classifier.classify(description)
         procedure = self.information.lookup(procedure_type)
