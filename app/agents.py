@@ -34,10 +34,33 @@ CATALOG: dict[str, Procedure] = {
         name="Renovacion de cedula de identidad",
         aliases=("renovar cedula", "renovacion cedula", "cedula vencida"),
         requirements=("Cedula de identidad", "Comprobante de pago"),
-        steps=("Agendar la atencion segun el canal oficial.", "Presentar los documentos requeridos.", "Verificar los datos antes de finalizar el tramite."),
+        steps=(
+            "Agendar la atencion segun el canal oficial.",
+            "Presentar los documentos requeridos.",
+            "Verificar los datos antes de finalizar el tramite.",
+        ),
         cost="Verificar el valor vigente en la fuente oficial.",
         source_url="https://www.registrocivil.gob.ec/",
     ),
+
+    "renovacion_pasaporte": Procedure(
+        name="Renovacion de pasaporte",
+        aliases=("pasaporte", "renovar pasaporte", "pasaporte vencido"),
+        requirements=(
+            "Cedula de identidad",
+            "Comprobante de pago",
+            "Pasaporte anterior",
+        ),
+        steps=(
+            "Verificar los requisitos y el valor vigente en la fuente oficial.",
+            "Solicitar o confirmar el turno por el canal oficial.",
+            "Presentarse con los documentos requeridos.",
+            "Revisar los datos antes de finalizar el tramite.",
+        ),
+        cost="Verificar el valor vigente en la fuente oficial.",
+        source_url="https://www.gob.ec/",
+    ),
+
     "registro_nacimiento": Procedure(
         name="Inscripcion de nacimiento",
         aliases=("registro nacimiento", "inscripcion nacimiento", "registrar nacimiento"),
