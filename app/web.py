@@ -32,7 +32,7 @@ LANDING_PAGE = r'''<!doctype html>
   <main>
     <section>
       <h2>Inicia tu solicitud</h2>
-      <p class="hint">Describe el tramite que necesitas. TramIA te indicara los requisitos conocidos y, si hace falta, lo derivara a un funcionario.</p>
+      <p class="hint">Describe el tramite que necesitas. TramIA te indicara los requisitos conocidos y, si hace falta, lo derivara a un secretario.</p>
       <form id="request-form">
         <label for="name">Nombre completo</label><input id="name" required placeholder="Ej. Ana Perez">
         <label for="email">Correo electronico</label><input id="email" required type="email" placeholder="ana@correo.com">
@@ -49,7 +49,7 @@ LANDING_PAGE = r'''<!doctype html>
     </section>
     <section id="result">
       <h2>Resultado de la orientacion</h2>
-      <div id="result-content" class="empty">Completa el formulario para recibir una guia personalizada.</div>
+      <div id="result-content" class="empty">Completa el formulario para recibir una guia paso a paso.</div>
       <button id="pending" class="secondary" type="button">Ver casos para funcionario</button>
       <div id="pending-content"></div>
     </section>
