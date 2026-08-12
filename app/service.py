@@ -22,11 +22,12 @@ class TramService:
 
     def submit(self, payload: dict[str, Any]) -> dict[str, Any]:
         citizen_name = str(payload.get("citizen_name", "")).strip()
+        cedula = str(payload.get("cedula", "")).strip()
         email = str(payload.get("email", "")).strip()
         description = str(payload.get("description", "")).strip()
         documents = payload.get("documents", [])
-        if not citizen_name or not email or not description:
-            raise ValueError("citizen_name, email y description son obligatorios.")
+        if not citizen_name or not cedula or not email or not description:
+            raise ValueError("citizen_name, cedula, email y description son obligatorios.")
         if not isinstance(documents, list) or any(not isinstance(item, dict) or not item.get("name") for item in documents):
             raise ValueError("documents debe ser una lista de objetos con el campo name.")
 
@@ -39,6 +40,7 @@ class TramService:
         record = {
             "code": f"TRAM-{uuid.uuid4().hex[:8].upper()}",
             "citizen_name": citizen_name,
+            "cedula": cedula,
             "email": email,
             "description": description,
             "procedure_type": procedure_type,

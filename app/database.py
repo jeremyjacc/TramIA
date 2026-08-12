@@ -1,4 +1,4 @@
-﻿"""Persistencia local y trazabilidad para TramIA."""
+"""Persistencia local y trazabilidad para TramIA."""
 
 from __future__ import annotations
 
@@ -35,6 +35,7 @@ class TramDatabase:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     code TEXT NOT NULL UNIQUE,
                     citizen_name TEXT NOT NULL,
+                    cedula TEXT NOT NULL,
                     email TEXT NOT NULL,
                     description TEXT NOT NULL,
                     procedure_type TEXT,
@@ -67,8 +68,8 @@ class TramDatabase:
             cursor = connection.execute(
                 """
                 INSERT INTO requests
-                (code, citizen_name, email, description, procedure_type, status, human_review, guide_json)
-                VALUES (:code, :citizen_name, :email, :description, :procedure_type, :status,
+                (code, citizen_name, cedula, email, description, procedure_type, status, human_review, guide_json)
+                VALUES (:code, :citizen_name, :cedula, :email, :description, :procedure_type, :status,
                         :human_review, :guide_json)
                 """,
                 request,
@@ -124,7 +125,7 @@ class TramDatabase:
     def pending_human_reviews(self) -> list[dict[str, Any]]:
         with self._connection() as connection:
             rows = connection.execute(
-                """SELECT id, code, citizen_name, email, description, procedure_type, status, created_at
+                """SELECT id, code, citizen_name, cedula, email, description, procedure_type, status, created_at
                 FROM requests WHERE human_review = 1 ORDER BY created_at"""
             ).fetchall()
             return [dict(row) for row in rows]

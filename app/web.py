@@ -1,4 +1,4 @@
-﻿"""Pagina web local para usar TramIA."""
+"""Pagina web local para usar TramIA."""
 
 LANDING_PAGE = r'''<!doctype html>
 <html lang="es">
@@ -35,12 +35,14 @@ LANDING_PAGE = r'''<!doctype html>
       <p class="hint">Describe el tramite que necesitas. TramIA te indicara los requisitos conocidos y, si hace falta, lo derivara a un secretario.</p>
       <form id="request-form">
         <label for="name">Nombre completo</label><input id="name" required placeholder="Ej. Ana Perez">
+        <label for="cedula">Cédula de identidad</label><input id="cedula" required placeholder="Ej. 1712345678">
         <label for="email">Correo electronico</label><input id="email" required type="email" placeholder="ana@correo.com">
         <label for="description">Que tramite necesitas?</label><textarea id="description" required placeholder="Ej. Necesito renovar mi cedula vencida"></textarea>
         <label>Documentos que ya tienes</label>
         <div class="docs">
           <label class="doc"><input type="checkbox" value="Cedula de identidad"> Cedula de identidad</label>
           <label class="doc"><input type="checkbox" value="Comprobante de pago"> Comprobante de pago</label>
+          <label class="doc"><input type="checkbox" value="Pasaporte anterior"> Pasaporte anterior</label>
           <label class="doc"><input type="checkbox" value="Correo electronico"> Correo electronico</label>
           <label class="doc"><input type="checkbox" value="Certificado de nacido vivo"> Certificado de nacido vivo</label>
         </div>
@@ -64,6 +66,7 @@ LANDING_PAGE = r'''<!doctype html>
       const documents = [...document.querySelectorAll('.doc input:checked')].map(item => ({name:item.value, valid:true}));
       const payload = {
         citizen_name: document.querySelector('#name').value,
+        cedula: document.querySelector('#cedula').value,
         email: document.querySelector('#email').value,
         description: document.querySelector('#description').value,
         documents,
