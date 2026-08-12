@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import uuid
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,8 @@ class TramService:
         documents = payload.get("documents", [])
         if not citizen_name or not cedula or not email or not description:
             raise ValueError("citizen_name, cedula, email y description son obligatorios.")
+        if not re.match(r"^[\w\.-]+@[\w\.-]+\.\w+$", email):
+            raise ValueError("El correo electronico proporcionado no tiene un formato valido.")
         if not isinstance(documents, list) or any(not isinstance(item, dict) or not item.get("name") for item in documents):
             raise ValueError("documents debe ser una lista de objetos con el campo name.")
 
